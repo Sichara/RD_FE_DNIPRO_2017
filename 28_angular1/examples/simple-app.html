@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Simple App</title>
+    <script src="../assets/js/angular1.5.8.min.js"></script>
+    <script type="text/javascript">
+        angular.module('simpleApp',[])
+            .controller('Ctrl', function ( $scope ) {
+                $scope.students = [
+                    'Oleksandr Poliarush',
+                    'Oleh Martyn',
+                    'Roksolana Yasynevych',
+                    'Dmytro Golysh',
+                    'Marina Semiroz',
+                    'Yuriy Pankiv',
+                    'Iurii Danylevych',
+                    'Olya Slisarchuk',
+                    'Oleg Shmygelskyi',
+                    'Mykola Khodan',
+                    'Yuriy Sokolovskyy',
+                    'Yuriy Hurnyak',
+                    'Ihor Cherhavyy',
+                    'Nazar Dizhak',
+                    'Ivan Kshanovskyy'
+                ];
+            });
+    </script>
+</head>
+<body ng-app="simpleApp" ng-controller="Ctrl">
+    <input type="text" ng-model="query" placeholder="Search...">
+    <p>Found: {{ query.length ? filtered.length : 0 }}</p>
+    <div ng-show="filtered.length" style="background: #ccc; border: 1px solid #ddd; padding: 10px;">
+        <ul ng-show="query.length > 0" >
+            <li ng-repeat="name in students | filter : query as filtered">
+                {{ name }}
+            </li>
+        </ul>
+    </div>
+</body>
+</html>

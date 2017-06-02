@@ -1,0 +1,820 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>CSS Layouts</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <link href="../assets/css/reset.css" rel="stylesheet" type="text/css" />
+    <link href="../assets/css/fonts.css" rel="stylesheet" type="text/css" />
+    <link href="../assets/css/typography.css" rel="stylesheet" type="text/css" />
+    <link href="../assets/css/style.css" rel="stylesheet" type="text/css" />
+    <script type="text/javascript" src="../assets/js/lib/shCore.js"></script>
+    <script type="text/javascript" src="../assets/js/lib/shBrushJScript.js"></script>
+    <script type="text/javascript" src="../assets/js/lib/shBrushBash.js"></script>
+    <script type="text/javascript" src="../assets/js/lib/shAutoloader.js"></script>
+    <script type="text/javascript">
+        SyntaxHighlighter.all();
+    </script>
+
+    <style type="text/css">
+        .outer {
+            padding: 0 0 20px;
+        }
+
+        .inner {
+            height: 20px;
+            box-sizing: border-box;
+            width: calc(100%/3);
+            float: left;
+            border: 1px solid black;
+        }
+    </style>
+</head>
+<body>
+   
+<div class="wrapper">
+    <header class="mainheader">
+        <div class="logo">
+            <div class="divider"><a href="../index.html"><img src="../assets/img/Logo.png"></a></div>
+            <a href="../css-layouts/css-layouts.html#1"><span class="logotext">CSS Layouts</span></a>
+        </div>
+    </header>
+</div>
+
+<!-- ================== Slides ================== -->
+    <textarea id="source">
+
+
+
+class: center, middle
+
+.title[
+Front-end training
+# CSS Layouts
+]
+
+---
+
+
+class: center, middle
+# CSS Layouts: Intent
+<figure style="text-align: center">
+    <img src="images/layout.svg" width="450"/>
+</figure>
+
+---
+class: center, top
+# Box Model
+
+<figure style="text-align: center">
+    <img src="images/box-model.png" width="370" style="float: left"/>
+    <img src="images/onion.jpg" width="370" style="vertical-align: bottom">
+</figure>
+
+---
+class: center, top
+# Box Model
+
+<figure style="text-align: center">
+    <img src="images/box-model.png" width="700" style="float: left"/>
+</figure>
+
+---
+
+class: left, top
+# Box Model: width & height
+
+The size of the content box of:
+- text inside the box
+- size of children' boxes
+
+<div style="float:right">
+    <div>max-width</div>
+    <div>max-height</div>
+    <div>min-width</div>
+    <div>min-height</div>
+</div>
+<figure style="text-align: left;">
+    <img src="images/box-model.png" width="620"/>
+</figure>
+
+---
+
+class: left, top
+# Box Model: paddings
+
+
+<div style="float:right; font-size: 18px; line-height: 2;">
+    <div>padding: 10px 20px 30px 40px;</div>
+    <div>padding-top: 10px;</div>
+    <div>padding-right: 20px;</div>
+    <div>padding-bottom: 30px;</div>
+    <div>padding-left: 40px;</div>
+</div>
+<figure style="text-align: left;">
+    <img src="images/box-model.png" width="500"/>
+</figure>
+
+---
+
+class: left, top
+# Box Model: border
+
+
+<div style="float:right; font-size: 18px; line-height: 2;">
+    <div>border: 1px solid black;</div>
+    <div>border-width: 1px;</div>
+    <div>border-style: solid;</div>
+    <div>border-color: black;</div>
+    <div>border-top: 1px solid black;</div>
+    <div>border-top-width: 1px;</div>
+    <div>border-top-style: solid;</div>
+    <div>border-top-color: black;</div>
+    <div>...</div>
+
+</div>
+<figure style="text-align: left;">
+    <img src="images/box-model.png" width="500"/>
+</figure>
+
+---
+
+class: left, top
+# Box Model: margin
+
+
+<div style="float:right; font-size: 18px; line-height: 2;">
+    <div>margin: 10px 20px 30px 40px;</div>
+    <div>margin-top: 10px;</div>
+    <div>margin-right: 20px;</div>
+    <div>margin-bottom: 30px;</div>
+    <div>margin-left: 40px;</div>
+</div>
+<figure style="text-align: left;">
+    <img src="images/box-model.png" width="500"/>
+</figure>
+
+---
+
+#Margin collapsing: Adjacent siblings
+
+```html
+<div style="margin-bottom: 15px">Margin between these two containers will be... </div>
+<div style="margin-top: 15px">... 30px?</div>
+```
+---
+
+#Margin collapsing: Adjacent siblings
+
+```html
+<div style="margin-bottom: 15px">bottom margin of this container... </div>
+<div style="margin-top: 15px">...will be combined with top margin of this one.</div>
+```
+
+<figure style="text-align: center;">
+    <img src="images/collapsing1.jpg" width="600"/>
+</figure>
+<figure style="text-align: center;">
+    <img src="images/collapsing2.jpg" width="600"/>
+</figure>
+---
+
+#Margin collapsing: Adjacent siblings
+
+```html
+<div style="margin-bottom: 15px">bottom margin of this container... </div>
+<div style="margin-top: 20px">...will be combined with top margin of this one.</div>
+```
+
+<figure style="text-align: center;">
+    <img src="images/collapsing3.jpg" width="600"/>
+</figure>
+<figure style="text-align: center;">
+    <img src="images/collapsing4.jpg" width="600"/>
+</figure>
+
+---
+
+#Margin collapsing: Parent and first/last child
+```html
+<div style="margin-top: 10px;" id="parent">
+    <div style="margin-top: 10px;" id="child">
+        The top margin of #child and #parent will be combined into one margin of 10px.
+    </div>
+</div>
+```
+
+<figure style="text-align: center;">
+    <img src="images/collapsing5.jpg" width="600"/>
+</figure>
+<figure style="text-align: center;">
+    <img src="images/collapsing6.jpg" width="600"/>
+</figure>
+---
+
+#When the parent and first/child margin collapsing will not apply?
+- border, padding, inline content or clearance on top
+- border, padding, inline-content, height, min-height, max-height on bottom
+
+ <figure >
+    <img src="images/collapsing8.png" width="600"/>
+</figure>
+ <figure>
+    <img src="images/collapsing9.png" width="600"/>
+</figure>
+
+---
+#Margin collapsing: Empty blocks
+
+```html
+<div style="margin-top: 10px; margin-bottom: 10px;"></div>
+```
+<figure style="text-align: center;">
+    <img src="images/collapsing7.png" width="800"/>
+</figure>
+---
+#Margin collapsing: Empty blocks
+
+```html
+<div style="margin-top: 10px; margin-bottom: 10px;"></div>
+```
+<figure style="text-align: center;">
+    <img src="images/collapsing7.png" width="800"/>
+</figure>
+##When the empty blocks margin collapsing will not apply?
+- border
+- padding
+- inline content
+- height
+- min-height
+
+---
+#Overflow
+
+```html
+<div class="parent">
+    <div class="child"></div>
+</div>
+```
+
+```css
+.parent {
+    border: 4px red dotted; width: 500px; height: 500px;
+}
+.child {
+    border: 4px solid green; height: 400px; width: 700px;
+}
+```
+<div style=" border: 4px red dotted; width: 250px; height: 250px;">
+    <div style="border: 4px solid green; height: 200px; width: 350px;"></div>
+</div>
+---
+#Overflow: visible (default)
+
+```html
+<div class="parent">
+    <div class="child"></div>
+</div>
+```
+
+```css
+.parent {
+    border: 4px red dotted; width: 500px; height: 500px; overflow: visible;
+}
+.child {
+    border: 4px solid green; height: 400px; width: 700px;
+}
+```
+<div style=" border: 4px red dotted; width: 250px; height: 250px; overflow: visible">
+    <div style="border: 4px solid green; height: 200px; width: 350px;"></div>
+</div>
+---
+#Overflow: hidden
+
+```html
+<div class="parent">
+    <div class="child"></div>
+</div>
+```
+
+```css
+.parent {
+    border: 4px red dotted; width: 500px; height: 500px; overflow: hidden;
+}
+.child {
+    border: 4px solid green; height: 400px; width: 700px;
+}
+```
+<div style=" border: 4px red dotted; width: 250px; height: 250px; overflow: hidden">
+    <div style="border: 4px solid green; height: 200px; width: 350px;"></div>
+</div>
+---
+#Overflow: auto
+
+```html
+<div class="parent">
+    <div class="child"></div>
+</div>
+```
+
+```css
+.parent {
+    border: 4px red dotted; width: 500px; height: 500px; overflow: auto;
+}
+.child {
+    border: 4px solid green; height: 400px; width: 700px;
+}
+```
+<div style=" border: 4px red dotted; width: 250px; height: 250px; overflow: auto">
+    <div style="border: 4px solid green; height: 200px; width: 350px;"></div>
+</div>
+---
+#Overflow: scroll
+
+```html
+<div class="parent">
+    <div class="child"></div>
+</div>
+```
+
+```css
+.parent {
+    border: 4px red dotted; width: 500px; height: 500px; overflow: scroll;
+}
+.child {
+    border: 4px solid green; height: 400px; width: 700px;
+}
+```
+<div style=" border: 4px red dotted; width: 250px; height: 250px; overflow: scroll">
+    <div style="border: 4px solid green; height: 200px; width: 350px;"></div>
+</div>
+---
+
+#Outline
+```css
+padding: 50px;
+border: 50px solid green;
+margin: 50px;
+outline: 25px solid red;
+
+```
+<figure style="text-align: center;">
+    <img src="images/outline.png"/>
+</figure>
+---
+
+#Types of CSS boxes: block
+```html
+<div>I am text before a child
+    <div>I am a child</div>
+    I am text after child</div>
+```
+
+```css
+div > div {
+   display: block; /* default */
+   width: 200px; height: 80px;
+   padding: 20px; margin: 50px;
+   border: 2px blue solid;
+   background-color: yellow;
+}
+```
+
+<div>I am text before a child
+    <div style=" width: 200px;
+   height: 80px;
+   padding: 20px;
+   border: 2px blue solid;
+   margin: 50px;
+   background-color: yellow;">I am a child</div>
+    I am text after child
+</div>
+
+---
+
+#Types of CSS boxes: inline
+```html
+<div>I am text before a child
+    <div>I am a child</div>
+    I am text after child</div>
+```
+
+```css
+div > div {
+   display: inline;
+   width: 200px;
+   height: 80px;
+   padding: 20px;
+   margin: 50px;
+   border: 2px blue solid;
+   background-color: yellow;
+}
+```
+
+<div>I am text before a child
+    <div style=" width: 200px;
+    display: inline;
+   height: 80px;
+   padding: 20px;
+   margin: 50px;
+   border: 2px blue solid;
+   background-color: yellow;">I am a child</div>
+    I am text after child
+</div>
+---
+
+#Types of CSS boxes: inline-block
+```html
+<div>I am text before a child
+    <div>I am a child</div>
+    I am text after child</div>
+```
+
+```css
+div > div {
+   display: inline-block
+   width: 200px;
+   height: 80px;
+   padding: 20px;
+   margin: 50px;
+   border: 2px blue solid;
+   background-color: yellow;
+}
+```
+
+<div>I am text before a child
+    <div style=" width: 200px;
+    display: inline-block;
+   height: 80px;
+   padding: 20px;
+   margin: 50px;
+   border: 2px blue solid;
+   background-color: yellow;">I am a child</div>
+    I am text after child
+</div>
+---
+
+        <div style="float: left; margin-right: 40px;"><h2>Block HTML elements</h2>
+<ul>
+<li class="w3rlist">p</li>
+<li class="w3rlist">h1, h2, h3, h4, h5, h6</li>
+<li class="w3rlist">ol, ul</li>
+<li class="w3rlist">pre</li>
+<li class="w3rlist">address</li>
+<li class="w3rlist">blockquote</li>
+<li class="w3rlist">dl</li>
+<li class="w3rlist">div</li>
+<li class="w3rlist">fieldset</li>
+<li class="w3rlist">form</li>
+<li class="w3rlist">hr</li>
+<li class="w3rlist">noscript</li>
+<li class="w3rlist">table</li>
+</ul>
+</div>
+        <div><h2>Inline HTML elements</h2></div>
+<ul>
+<li class="w3rlist"> b, big, i, small, tt</li>
+<li class="w3rlist">abbr, acronym, cite, code, dfn, em, kbd, strong, samp, var</li>
+<li class="w3rlist">a, bdo, br, img, map, object, q, script, span, sub, sup</li>
+<li class="w3rlist">button, input, label, select, textarea </li>
+</ul>
+
+---
+
+#box-sizing: content-box | border-box
+<img src="images/box-model.png">
+
+---
+
+#Floating
+
+```css
+img {
+  float: left;
+  margin: 0 30px 0 0;
+}
+```
+<img src="images/float-image.png" width="400"/>
+---
+
+#Floating: two columns
+.columns[.col-50[
+```css
+div:nth-of-type(1) {
+  width: 48%;
+  float: left;
+}
+```
+].col-50[
+```css
+  div:nth-of-type(2) {
+  width: 48%;
+  float: right;
+}
+```
+]]
+<figure text-align="center">
+    <img src="images/floating-two.png" width="600"/>
+</figure>
+---
+
+#Floating: three columns
+.columns[.col-30[
+```css
+div:nth-of-type(1) {
+  width: 36%;
+  float: left;
+}
+```
+].col-30[
+```css
+div:nth-of-type(2) {
+  width: 36%;
+  float: left;
+}
+```
+].col-40[
+```css
+  div:nth-of-type(3) {
+  width: 26%;
+  float: right;
+}
+```
+]]
+<figure text-align="center">
+    <img src="images/floating-three.png" width="600"/>
+</figure>
+---
+
+#Clearing floats
+
+- left
+- right
+- both
+
+---
+class: left, middle
+
+# Floating specifics
+
+The floated element automatically asumess **display: block**.
+
+If the parent element contains only floated elements, it's **height will equal to 0**
+
+<figure style="text-align: center;">
+
+<img src="data:image/png;base64,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"/>
+</figure>
+---
+#Normal document flow
+
+- 100% parent's width and content's height (block)
+- content's width and content's height (inline)
+- add layers of box model
+- vertically - block
+- horizontally or wrapped - inline
+- margin collapsing
+
+---
+
+#Positioning
+
+- override normal flow
+- change element's position
+- place one element over another one
+- fix element's position
+        in a browser window when a page is scrolled
+---
+#position: static (default)
+```css
+div {
+   position: static; /* normal flow */
+}
+```
+---
+#position: relative
+
+
+.columns[.col-50[
+```html
+<div></div>
+<div></div>
+<div></div>
+<div></div>
+```].col-50[
+```css
+div { width: 400px;
+height: 50px;
+border: 1px red solid;
+margin: 10px; }
+```]]
+<!--@todo: refactor inline styles in this presentation-->
+<div style="width: 400px;height: 50px;border: 1px red solid;margin: 10px"></div>
+<div style="width: 400px;height: 50px;border: 1px red solid;margin: 10px"></div>
+<div style="width: 400px;height: 50px;border: 1px red solid;margin: 10px"></div>
+<div style="width: 400px;height: 50px;border: 1px red solid;margin: 10px"></div>
+---
+
+#position: relative
+
+```css
+div:nth-of-type(2){
+    position: relative;
+    border: 1px dotted green;
+}
+```
+
+<div style="width: 400px;height: 50px;border: 1px red solid;margin: 10px"></div>
+<div style="width: 400px;height: 50px;border: 1px green dashed;margin: 10px; position: relative"></div>
+<div style="width: 400px;height: 50px;border: 1px red solid;margin: 10px"></div>
+<div style="width: 400px;height: 50px;border: 1px red solid;margin: 10px"></div>
+
+---
+
+#position: relative
+
+```css
+div:nth-of-type(2){
+    position: relative;
+    border: 1px dotted green;
+    top: 20px;
+    left: 20px;
+    /**
+     bottom: Xpx;
+     right: Ypx;
+    **/
+}
+```
+
+<div style="width: 400px;height: 50px;border: 1px red solid;margin: 10px"></div>
+<div style="width: 400px;height: 50px;border: 1px green dashed;margin: 10px; position: relative; top: 20px; left: 20px;"></div>
+<div style="width: 400px;height: 50px;border: 1px red solid;margin: 10px"></div>
+<div style="width: 400px;height: 50px;border: 1px red solid;margin: 10px"></div>
+
+---
+
+#position: absolute
+
+```css
+div:nth-of-type(2){
+    position: absolute;
+    border: 2px dotted green;
+}
+```
+
+<div style="width: 400px;height: 50px;border: 1px red solid;margin: 10px"></div>
+<div style="width: 400px;height: 50px;border: 2px green dashed;margin: 10px; position: absolute"></div>
+<div style="width: 400px;height: 50px;border: 1px red solid;margin: 10px"></div>
+<div style="width: 400px;height: 50px;border: 1px red solid;margin: 10px"></div>
+
+---
+
+#position: absolute (oops...)
+
+```css
+div:nth-of-type(2){
+    position: absolute;
+    border: 2px dotted green;
+    top: 20px;
+    left: 20px;
+}
+```
+
+<div style="width: 400px;height: 50px;border: 1px red solid;margin: 10px"></div>
+<div style="width: 400px;height: 50px;border: 2px green dashed;margin: 10px; position: absolute; top: 20px; left: 20px;"></div>
+<div style="width: 400px;height: 50px;border: 1px red solid;margin: 10px"></div>
+<div style="width: 400px;height: 50px;border: 1px red solid;margin: 10px"></div>
+
+---
+
+#position: absolute (oops...)
+
+```css
+div:nth-of-type(2){
+    position: absolute;
+    border: 2px dotted green;
+    top: 20px;
+    right: 20px;
+}
+```
+<div style="width: 400px;height: 50px;border: 1px red solid;margin: 10px"></div>
+<div style="width: 400px;height: 50px;border: 2px green dashed;margin: 10px; position: absolute; top: 20px; right: 20px;"></div>
+<div style="width: 400px;height: 50px;border: 1px red solid;margin: 10px"></div>
+<div style="width: 400px;height: 50px;border: 1px red solid;margin: 10px"></div>
+---
+
+#position: absolute
+- removed from normal flow
+- gets start of coordinates from the relatively positioned element
+- saves margins
+- margin collapsing does not apply
+---
+#position: absolute - overlapping
+```html
+<div style="position: relative">
+    <div style="position: absolute; /* ... */ background-color: red;"></div>
+    <div style="position: absolute; left: 10px; top: 10px; /*...*/ background-color: green;  "></div>
+</div>
+```
+<div style="position: relative">
+    <div style="position: absolute; width: 400px; height: 40px; background-color: red;"></div>
+    <div style="position: absolute; left: 10px; top: 10px; width: 400px; height: 40px; background-color: green; "></div>
+</div>
+
+---
+#z-index
+```html
+<div style="position: relative">
+    <div style="position: absolute;  z-index:1; /* ... */ background-color: red;"></div>
+    <div style="position: absolute; left: 10px; top: 10px; /*...*/ background-color: green;  "></div>
+</div>
+```
+<div style="position: relative">
+    <div style="position: absolute; z-index:1;  width: 400px; height: 40px; background-color: red;"></div>
+    <div style="position: absolute; left: 10px; top: 10px; width: 400px; height: 40px; background-color: green; "></div>
+</div>
+
+---
+#z-index
+```html
+<div style="position: relative">
+    <div style="position: absolute;  z-index:1; /* ... */ background-color: red;"></div>
+    <div style="position: absolute; z-index:2;  left: 10px; top: 10px; /*...*/ background-color: green;  "></div>
+</div>
+```
+<div style="position: relative">
+    <div style="position: absolute; z-index:1;  width: 400px; height: 40px; background-color: red;"></div>
+    <div style="position: absolute;  z-index:2; left: 10px; top: 10px; width: 400px; height: 40px; background-color: green; "></div>
+</div>
+
+---
+#position: fixed
+```html
+<div style="position: relative; overflow: auto; height: 100px; width: 400px">
+    <div style="position: fixed; width: 390px; background-color: green; padding: 5px;">Fixed element</div>
+    <div style="height: 30px;"></div>
+    <div>Simple element 1</div>
+    <div>Simple element 2</div>
+    <div>Simple element 3</div>
+    ...
+</div>
+```
+<div style="position: relative; overflow: auto; height: 100px; width: 400px">
+    <div style="position: fixed; width: 390px; background-color: green; padding: 5px;">Fixed element</div>
+    <div style="height: 30px;"></div>
+    <div>Simple element 1</div>
+    <div>Simple element 2</div>
+    <div>Simple element 3</div>
+    <div>Simple element 4</div>
+    <div>Simple element 5</div>
+    <div>Simple element 6</div>
+    <div>Simple element 7</div>
+    <div>Simple element 8</div>
+    <div>Simple element 9</div>
+    <div>Simple element 10</div>
+    <div>Simple element 11</div>
+    <div>Simple element 12</div>
+</div>
+
+---
+
+#position: sticky
+
+---
+#Modern layouts: intent
+
+- size
+- order
+
+<p>may depend on</p>
+
+- content
+- screen resolution
+- screen orientation
+
+[Link to flexbox presentation](https://goo.gl/cAhFQI)
+---
+class: center, middle
+# Play with flexboxes
+
+[Fun with flexbox](http://flexboxfroggy.com/)
+
+---
+class: left, middle
+# Additional links
+
+- [CSS-Tricks Almanac](http://css-tricks.com/almanac/)
+- [Codecademy CSS lessons](http://www.codecademy.com)
+- [Learn Layout](http://learnlayout.com)
+- [Fun with flexbox](http://flexboxfroggy.com/)
+---
+class: center, middle
+#Thank you :)
+
+    </textarea>
+<!-- ================== End of Slides ================== -->
+
+<script src="../assets/js/remark-latest.min.js" type="text/javascript"></script>
+
+    <script type="text/javascript">remark.create({highlightStyle: 'github'});</script>
+</body>
+</html>
