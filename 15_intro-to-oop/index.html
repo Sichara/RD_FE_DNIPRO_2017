@@ -276,11 +276,11 @@ function Clock(hours, minutes) {
   var _hours = hours;
   var _minutes = minutes;
 
-  this.setHours(hours) {
+  this.setHours = function (hours) {
     _hours = hours;
   }
 
-  this.getHours() {
+  this.getHours = function () {
     return _hours;
   }
 }
