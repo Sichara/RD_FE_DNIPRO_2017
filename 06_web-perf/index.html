@@ -206,58 +206,6 @@ All the steps the browser went through:
 ---
 
 
-
-layout: true
-
-# Render Blocking CSS
-
-
-
----
-
-
-
-- By default, CSS is treated as a render blocking resource.
-- Media types and media queries allow us to mark some CSS resources as non-render blocking.
-- All CSS resources, regardless of blocking or non-blocking behavior, are downloaded by the browser.
-
-
-
----
-
-
-
-CSS is a render blocking resource, get it down to the client as soon and as quickly as possible to optimize the time to first render.
-
-The experience on the right is often referred to as a “Flash of Unstyled Content” (FOUC).
-
-.columns[.col-50[.img-wrap-60[
-    ![NYT with css](assets/img/css-render-blocking-with-css.png)
-    ]].col-50[.img-wrap-60[
-    ![NYT without css](assets/img/css-render-blocking-without-css.png)
-]]]
-
-
-
----
-
-
-
-### Use CSS media queries for responsiveness!
-
-CSS “media types” and “media queries” allow us to address use-cases when the page is being printed, or being projected onto a large monitor:
-
-``` html
-    <link href="style.css"    rel="stylesheet">
-    <link href="style.css"    rel="stylesheet" media="screen">
-    <link href="portrait.css" rel="stylesheet" media="orientation:portrait">
-    <link href="print.css"    rel="stylesheet" media="print">
-```
-
-
-
----
-
 layout: false
 
 
@@ -513,32 +461,6 @@ Using absolute positioning makes element a child of the body in the render tree,
 
 
 
-# Text compression with GZIP
-
-- GZIP performs best on text-based assets: CSS, JavaScript, HTML
-- All modern browsers support GZIP compression and will automatically request it
-- Your server needs to be configured to enable GZIP compression
-- Some CDNs require special care to ensure that GZIP is enabled
-
-
-.img-wrap-100[![Dom timing](assets/img/gzip-transfer-vs-actual-size.png)]
-
-
-
----
-
-# Combine javascript and css fles
-
-
-.img-wrap-80[![Waterfall](assets/img/waterfall.png)]
-
-
-
----
-
-
-
-
 layout: true
 
 # Image optimization
@@ -655,19 +577,6 @@ Left to right (PNG): 32-bit (16M colors), 7-bit (128 colors), 5-bit (32 colors).
 ---
 
 
-
-### Selecting the right image format
-
-- Start by selecting the right universal format: GIF, PNG, JPEG
-- Experiment and select the best settings for each format: quality, palette size, etc.
-- Consider adding WebP and JPEG XR assets for modern clients
-
-.img-wrap-70[![](assets/img/images-format-table.png)]
-
-
----
-
-
 ## Image compression tools
 
 - [https://tinypng.com/](https://tinypng.com/)
@@ -706,18 +615,6 @@ Fetching something over the network is both slow and expensive: large responses 
 - [Defining optimal Cache-Control policy](https://developers.google.com/web/fundamentals/performance/optimizing-content-efficiency/http-caching#defining-optimal-cache-control-policy)
 - [Invalidating and updating cached responses](https://developers.google.com/web/fundamentals/performance/optimizing-content-efficiency/http-caching#invalidating-and-updating-cached-responses)
 - [Caching checklist](https://developers.google.com/web/fundamentals/performance/optimizing-content-efficiency/http-caching#caching-checklist)
-
-
-
----
-
-
-
-#HTTP/2
-
-The focus of the protocol is on performance; specifically, end-user perceived latency, network and server resource usage. One major goal is to allow the use of a single connection from browsers to a Web site.
-
-.img-wrap-70[![http2](assets/img/http1-vs-http2.png)]
 
 
 
